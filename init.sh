@@ -59,8 +59,58 @@ else
 	git clone $repo_urls
 fi
 
-./telegraf -config $rootdir/url.conf -config-directory $rootdir/$urls_dir/$node -pidfile $rootdir/telegraf.pid &>>$rootdir/telegraf.log &
+cat >control<<EOF
+#!/bin/bash
+[ \$# -lt 1 ] && echo "\$0 (start|stop|restart|reload|status)"
 
+function start()
+{
+	[ -f $rootdir/telegraf.pid ] && echo "$rootdir/telegraf.pid exists!" && exit 1
+	$rootdir/telegraf -config $rootdir/url.conf -config-directory $rootdir/$urls_dir/$node -pidfile $rootdir/telegraf.pid &>>$rootdir/telegraf.log &
+}
+
+function stop()
+{
+	kill -INT \`cat $rootdir/telegraf.pid\`
+	rm -f $rootdir/telegraf.pid
+}
+
+function status()
+{
+	if [ ! -f $rootdir/telegraf.pid ];then
+		echo "telegraf is not running"
+		exit 1
+	fi
+
+	pid=\`ps aux |grep "telegraf" |grep -v "grep" |awk '{print \$2}' |head -n 1\`
+	fpid=\`cat $rootdir/telegraf.pid\`
+	if [ "\$pid"x == "\$fpid"x ];then
+		echo "telegraf is running(\$pid)"
+	else
+		echo "telegraf is dead but pid file exists"
+	fi
+}
+
+function restart()
+{
+	stop
+	start
+}
+
+function reload()
+{
+	kill -HUP \`cat $rootdir/telegraf.pid\`
+}
+
+case \$1 in
+	start) start;;
+	stop) stop;;
+	restart) restart;;
+	reload) reload;;
+	status) status;;
+	*) exit 1;;
+esac
+EOF
 
 # 修改cron
 sed -i "/$cron/d" /etc/crontab
@@ -71,3 +121,4 @@ cat >>/etc/crontab<<EOF
 */$interval * * * * root $rootdir/$cron &> $rootdir/cron.log
 EOF
 
+chmod +x control

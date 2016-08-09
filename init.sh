@@ -44,6 +44,7 @@ fi
 
 [ -f telegraf.pid ] && kill -9 `cat telegraf.pid`
 rm -f telegraf
+rm -f telegraf.pid
 cp $telegraf_dir/telegraf ./
 chmod +x telegraf
 
@@ -122,3 +123,6 @@ cat >>/etc/crontab<<EOF
 EOF
 
 chmod +x control
+./control status
+./control start
+./control status

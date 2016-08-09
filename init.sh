@@ -118,7 +118,7 @@ sed -i "/telegraf-cron/d" /etc/crontab
 cat >>/etc/crontab<<EOF
 
 # telegraf-cron 定时pull git repo,更新telegraf配置文件
-*/$interval * * * * root $rootdir/$cron &> $rootdir/cron.log
+*/$interval * * * * root $rootdir/$cron &>> $rootdir/cron.log
 EOF
 
 chmod +x control

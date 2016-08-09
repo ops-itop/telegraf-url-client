@@ -19,6 +19,7 @@ node=`grep "node = " $conf | awk '{print $NF}'`
 cd $rootdir/$urls_dir
 git pull |grep -E "$node/[0-9]{1,}\.conf" &>/dev/null && r=1 || r=0
 
+cd ../
 if [ $r -eq 1 ];then
 	kill -HUP `cat telegraf.pid`
 fi

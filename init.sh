@@ -125,4 +125,5 @@ EOF
 chmod +x control
 ./control status
 ./control start
+sleep 5
 ./control status

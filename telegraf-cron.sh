@@ -17,7 +17,7 @@ urls_dir=`echo $repo_urls |awk -F'/' '{print $NF}' |cut -f1 -d'.'`
 node=`grep "node = " $conf | awk '{print $NF}'`
 
 # 判断telegraf是否在运行
-ps aux |grep telegraf |grep -v "grep" && st=1 || st=0
+ps aux |grep telegraf |grep -vE "grep|cron" && st=1 || st=0
 #./control status |grep "is running" && st=1 || st=0
 if [ $st -eq 0 ];then
 	rm -f telegraf.pid

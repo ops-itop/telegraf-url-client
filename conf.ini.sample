@@ -4,3 +4,4 @@ rootdir = /home/telegraf-url
 telegraf = http://git.xxx.cn/user/telegraf-bin.git
 influxdb = influxdb = http://localhost:8086
 interval = 2
+testurl = http://www.baidu.com/

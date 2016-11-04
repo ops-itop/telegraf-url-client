@@ -19,6 +19,7 @@ telegraf=`grep "telegraf = " $conf |awk '{print $NF}'`
 telegraf_dir=`echo $telegraf |awk -F'/' '{print $NF}' |cut -f1 -d'.'`
 influxdb=`grep "influxdb = " $conf |awk '{print $NF}'`
 interval=`grep "interval" $conf |awk '{print $NF}'`
+testurl=`grep "testurl" $conf |awk '{print $NF}'`
 cron="telegraf-cron.sh"
 
 echo $rootdir
@@ -51,6 +52,7 @@ chmod +x telegraf
 # 修改配置文件 url.conf
 sed -i "s/monitor_node =.*/monitor_node = \"$node\"/g" $telegraf_conf
 sed -i "s#urls = \[.*#urls = \[\"$influxdb\"\]#g" $telegraf_conf
+sed -i "s#address = .*#address = \"$testurl\"#g" $telegraf_conf
 
 if [ -d $urls_dir ];then
 	cd $urls_dir

@@ -85,7 +85,7 @@ function status()
 		exit 1
 	fi
 
-	pid=\`ps aux |grep "telegraf" |grep -v "grep" |awk '{print \$2}' |head -n 1\`
+	pid=\`ps aux |grep "$rootdir" |grep "telegraf" |grep -v "grep" |awk '{print \$2}' |head -n 1\`
 	fpid=\`cat $rootdir/telegraf.pid\`
 	if [ "\$pid"x == "\$fpid"x ];then
 		echo "telegraf is running(\$pid)"

@@ -1,8 +1,12 @@
 # telegraf url_monitor client
 
+## 新版容器化
+使用kubernetes部署，目前只能部署一个节点
+
+## legacy
 初始化一个监控节点，git pull本节点监控项，如有变更，则reload telegraf
 
-## 扩容
+### 扩容
 
 暂时没有实现。想法如下：
 

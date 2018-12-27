@@ -2,6 +2,7 @@ IMAGENAME ?= telegraf-url
 REGISTRY ?= registry.cn-beijing.aliyuncs.com/kubebase
 TAG ?= latest
 IMAGE = $(REGISTRY)/$(IMAGENAME)
+PROXY ?= 
 APP ?= $(shell pwd |awk -F'/' '{print $$NF}')
 
 # 判断本地是否允许此容器，用于调试
@@ -15,7 +16,7 @@ APP_CONFIG_PATH ?= /run/secret/appconfig
 all: build-docker push
 
 build-docker:
-	docker build -t $(IMAGE):$(TAG) .
+	docker build $(PROXY) -t $(IMAGE):$(TAG) .
 
 push:
 	docker push $(IMAGE):$(TAG)
@@ -28,4 +29,4 @@ run:
 ifeq ($(exists), yes)
 	docker stop $(APP);docker rm $(APP)
 endif
-	docker run --name $(APP) -d -p $(PORT):10051 --env APP_CONFIG_PATH=$(APP_CONFIG_PATH) -v $(PWD)/etc/zabbix_server.conf:$(APP_CONFIG_PATH)/ZABBIX_SERVER_CONF $(IMAGE):latest
+	docker run --name $(APP) -d --env APP_CONFIG_PATH=$(APP_CONFIG_PATH) -v $(PWD)/url.conf:$(APP_CONFIG_PATH)/TELEGRAF_CONFIG $(IMAGE):latest

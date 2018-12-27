@@ -10,4 +10,7 @@ RUN make prepare
 RUN make build
 
 FROM alpine:3.8
+RUN apk add --no-cache git
 COPY --from=builder /go/bin/telegraf /telegraf
+COPY app.sh /app.sh
+CMD ["sh", "/app.sh"]

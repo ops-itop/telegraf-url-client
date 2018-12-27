@@ -3,6 +3,13 @@
 ## 新版容器化
 使用kubernetes部署，目前只能部署一个节点
 
+### 需要以下环境变量
+```
+GIT_REPO  url monitor配置文件git仓库
+NODE      监控节点名称(China, HongKong, UnitedStates)
+TELEGRAF_CONFIG  telegraf配置文件
+```
+
 ## legacy
 初始化一个监控节点，git pull本节点监控项，如有变更，则reload telegraf
 

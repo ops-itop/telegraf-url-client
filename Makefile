@@ -29,4 +29,4 @@ run:
 ifeq ($(exists), yes)
 	docker stop $(APP);docker rm $(APP)
 endif
-	docker run --name $(APP) -d --env APP_CONFIG_PATH=$(APP_CONFIG_PATH) -v $(PWD)/url.conf:$(APP_CONFIG_PATH)/TELEGRAF_CONFIG $(IMAGE):latest
+	docker run --name $(APP) -d --env APP_CONFIG_PATH=$(APP_CONFIG_PATH) -v $(PWD)/url.conf:$(APP_CONFIG_PATH)/TELEGRAF_CONFIG $(IMAGE):$(TAG)

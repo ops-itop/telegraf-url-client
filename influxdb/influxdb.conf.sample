@@ -1,0 +1,48 @@
+reporting-disabled = false
+[meta]
+  dir = "/var/lib/influxdb/meta"
+  retention-autocreate = true
+  logging-enabled = true
+  pprof-enabled = false
+  lease-duration = "1m0s"
+[data]
+  enabled = true
+  dir = "/var/lib/influxdb/data"
+  wal-dir = "/var/lib/influxdb/wal"
+  wal-logging-enabled = true
+  data-logging-enabled = true
+[cluster]
+[retention]
+  enabled = true
+  check-interval = "30m"
+[shard-precreation]
+  enabled = true
+  check-interval = "10m"
+  advance-period = "30m"
+[monitor]
+[admin]
+  enabled = true
+  bind-address = ":8083"
+  https-enabled = false
+  https-certificate = "/etc/ssl/influxdb.pem"
+[http]
+  enabled = true
+  bind-address = ":8086"
+  auth-enabled = false
+  log-enabled = true
+  write-tracing = false
+  pprof-enabled = false
+  https-enabled = false
+  https-certificate = "/etc/ssl/influxdb.pem"
+  max-row-limit = 10000
+[[graphite]]
+  enabled = false
+[[collectd]]
+  enabled = false
+[[opentsdb]]
+  enabled = false
+[[udp]]
+  enabled = false
+[continuous_queries]
+  log-enabled = true
+  enabled = true

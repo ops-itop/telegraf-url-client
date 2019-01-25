@@ -1,6 +1,6 @@
 IMAGENAME ?= telegraf-url
 REGISTRY ?= registry.cn-beijing.aliyuncs.com/kubebase
-TAG ?= latest
+TAG ?= $(shell git rev-parse --short HEAD)
 IMAGE = $(REGISTRY)/$(IMAGENAME)
 PROXY ?= 
 APP ?= $(shell pwd |awk -F'/' '{print $$NF}')

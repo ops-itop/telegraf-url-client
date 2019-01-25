@@ -3,3 +3,4 @@
 *.pid
 influxdb/debug/
 kapacitor/debug/
+debug/

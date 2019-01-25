@@ -1,0 +1,49 @@
+hostname = "kapacitor"
+data_dir = "/var/lib/kapacitor"
+
+[http]
+  bind-address = ":9092"
+  auth-enabled = false
+  log-enabled = true
+  write-tracing = false
+  pprof-enabled = false
+  https-enabled = false
+  https-certificate = "/etc/ssl/kapacitor.pem"
+  shutdown-timeout = "10s"
+  shared-secret = ""
+
+[replay]
+  dir = "/var/lib/kapacitor/replay"
+
+[storage]
+  boltdb = "/var/lib/kapacitor/kapacitor.db"
+
+[task]
+  dir = "/var/lib/kapacitor/tasks"
+  snapshot-interval = "1m0s"
+
+[[influxdb]]
+  enabled = true
+  name = "localhost"
+  default = true
+  urls = ["http://localhost:8086"]
+  username = ""
+  password = ""
+  ssl-ca = ""
+  ssl-cert = ""
+  ssl-key = ""
+  insecure-skip-verify = false
+  timeout = "0"
+  disable-subscriptions = false
+  subscription-protocol = "udp"
+  udp-bind = ""
+  udp-buffer = 1000
+  udp-read-buffer = 0
+  startup-timeout = "5m0s"
+  subscriptions-sync-interval = "1m0s"
+  [influxdb.subscriptions]
+  [influxdb.excluded-subscriptions]
+    _kapacitor = ["autogen"]
+
+[logging]
+  level = "DEBUG"

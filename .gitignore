@@ -1,3 +1,5 @@
 *.ini
 *.log
 *.pid
+influxdb/debug/
+kapacitor/debug/

@@ -8,7 +8,7 @@ COPY conf/inputs_all.go plugins/inputs/all/all.go
 COPY conf/outputs_all.go plugins/outputs/all/all.go
 RUN go get github.com/sparrc/gdm
 RUN /go/bin/gdm restore
-RUN go install -ldflags="-X main.version=1.0.0"
+RUN go install -ldflags="-X main.version=1.0.0" github.com/influxdata/telegraf/cmd/telegraf
 
 FROM alpine:3.8
 RUN apk add --no-cache git

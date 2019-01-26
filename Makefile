@@ -16,6 +16,7 @@ APP_CONFIG_PATH ?= /run/secret/appconfig
 all: build-docker push
 
 build-docker:
+	docker build $(PROXY) -t $(IMAGE):latest .
 	docker build $(PROXY) -t $(IMAGE):$(TAG) .
 
 push:

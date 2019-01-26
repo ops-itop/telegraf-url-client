@@ -31,4 +31,4 @@ run:
 ifeq ($(exists), yes)
 	docker stop $(APP);docker rm $(APP)
 endif
-	docker run --name $(APP) -d --env APP_CONFIG_PATH=$(APP_CONFIG_PATH) -v $(PWD)/debug/kapacitor.conf:$(APP_CONFIG_PATH)/KAPACITOR -v $(PWD)/debug/datadir:/var/lib/kapacitor $(IMAGE):$(TAG)
+	docker run --name $(APP) -d --env APP_CONFIG_PATH=$(APP_CONFIG_PATH) -v $(PWD)/debug/kapacitor.conf:$(APP_CONFIG_PATH)/KAPACITOR -v $(PWD)/debug/datadir:/var/lib/kapacitor -v $(PWD)/tickscript:/tickscript $(IMAGE):$(TAG)

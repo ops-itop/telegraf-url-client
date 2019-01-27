@@ -47,7 +47,8 @@
 [[inputs.url_monitor]]
   ## App Name
   app = "monitor"
-  interval = "30s"
+  cmdbid = "1111"
+  interval = "5s"
   ## Server address (default http://localhost)
   address = "http://www.qq.com/"
   ## Set response_timeout (default 5 seconds)

@@ -20,7 +20,7 @@
 [[outputs.influxdb]]
   urls = ["http://localhost:8086"]
   database = "telegraf"
-  retention_policy = ""
+  retention_policy = "default"
   write_consistency = "any"
   timeout = "20s"
   # username = "telegraf"

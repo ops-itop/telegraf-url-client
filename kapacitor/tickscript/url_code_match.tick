@@ -2,7 +2,7 @@ var win = 3m
 var origin = stream
     |from()
         .database('telegraf')
-        .retentionPolicy('autogen')
+        .retentionPolicy('default')
         .measurement('url_monitor')
         .groupBy('monitor_node','app','url', 'cmdbid')
     |window()
@@ -26,7 +26,7 @@ code_match
     |alert()
         .id('HTTP_CODE:{{ index .Tags "cmdbid" }}.{{ index .Tags "url" }}')
         .message('')
-        .crit(lambda: "code_match.mean" < 0.4) // 总是触发报警，用来测试报警是否工作
+        .crit(lambda: "code_match.mean" < 4) // 总是触发报警，用来测试报警是否工作
         //.critReset(lambda: "code_match.mean" == 1)
         //.stateChangesOnly(30m)
         .log('/var/lib/kapacitor/alerts.log')
